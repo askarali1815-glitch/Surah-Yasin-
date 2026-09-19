@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Surah Yasin | القرآن الكريم</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+background:#071c19;
+color:#222;
+font-family:Arial,sans-serif;
+transition:.3s;
+}
+
+/* STARS */
+
+.stars{
+position:fixed;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+z-index:-1;
+}
+
+.star{
+position:absolute;
+width:3px;
+height:3px;
+background:#fff;
+border-radius:50%;
+opacity:.7;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:.2;transform:scale(.7)}
+to{opacity:1;transform:scale(1.4)}
+}
+
+/* HEADER */
+
+header{
+padding:35px 15px 30px;
+text-align:center;
+color:white;
+background:
+linear-gradient(#063c35dd,#03241fdd);
+border-bottom:3px solid #c9a227;
+}
+
+.moon{
+font-size:45px;
+margin-bottom:5px;
+}
+
+header h1{
+margin:5px 0;
+font-family:serif;
+font-size:36px;
+}
+
+header p{
+margin:8px 0;
+font-size:14px;
+opacity:.9;
+}
+
+.stats{
+margin:18px auto 0;
+max-width:400px;
+display:flex;
+justify-content:center;
+gap:10px;
+}
+
+.stat{
+background:#ffffff15;
+border:1px solid #c9a22788;
+border-radius:12px;
+padding:10px 16px;
+}
+
+.stat b{
+display:block;
+font-size:18px;
+color:#f0cf63;
+}
+
+/* TOOLBAR */
+
+.tools{
+position:sticky;
+top:0;
+z-index:20;
+padding:10px;
+background:#ffffffee;
+backdrop-filter:blur(10px);
+box-shadow:0 3px 15px #0005;
+}
+
+audio{
+width:100%;
+height:42px;
+margin-bottom:9px;
+}
+
+.buttons{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px;
+}
+
+button{
+border:0;
+border-radius:9px;
+padding:11px 5px;
+background:#075e54;
+color:white;
+font-size:13px;
+font-weight:bold;
+cursor:pointer;
+transition:.2s;
+}
+
+button:active{
+transform:scale(.94);
+}
+
+.search{
+width:100%;
+margin-top:8px;
+padding:12px;
+border:1px solid #bbb;
+border-radius:9px;
+font-size:15px;
+outline:none;
+}
+
+/* QURAN PAPER */
+
+.page{
+max-width:850px;
+margin:25px auto;
+padding:15px;
+}
+
+.paper{
+background:#fffdf1;
+padding:30px 25px;
+border:10px double #6d5420;
+border-radius:5px;
+box-shadow:
+0 8px 30px #0008,
+inset 0 0 30px #d7c99a;
+position:relative;
+}
+
+/* ORNAMENT */
+
+.ornament{
+text-align:center;
+color:#a17b18;
+font-size:24px;
+margin:5px;
+}
+
+.page-title{
+text-align:center;
+font-family:serif;
+font-size:22px;
+color:#674d12;
+margin:8px;
+font-weight:bold;
+}
+
+.bismillah{
+direction:rtl;
+text-align:center;
+font-family:serif;
+font-size:31px;
+line-height:2;
+color:#151515;
+margin:20px 0 25px;
+}
+
+/* QURAN TEXT */
+
+.quran{
+direction:rtl;
+text-align:right;
+font-family:"Times New Roman",serif;
+font-size:29px;
+line-height:2.45;
+color:#151515;
+}
+
+.ayah{
+display:inline;
+}
+
+.num{
+display:inline-block;
+color:#896914;
+font-family:serif;
+font-size:20px;
+margin:0 4px;
+white-space:nowrap;
+}
+
+/* FOOTER */
+
+.paper-footer{
+margin-top:30px;
+padding-top:15px;
+border-top:1px solid #b99b52;
+text-align:center;
+font-family:serif;
+color:#765b18;
+}
+
+.footer{
+color:white;
+text-align:center;
+padding:25px;
+font-size:13px;
+}
+
+/* PROGRESS */
+
+.progress-box{
+max-width:850px;
+margin:0 auto 10px;
+padding:0 15px;
+color:white;
+font-size:13px;
+}
+
+.progress{
+height:6px;
+background:#ffffff44;
+border-radius:10px;
+overflow:hidden;
+margin-top:5px;
+}
+
+.progress-bar{
+height:100%;
+width:0%;
+background:#d7b642;
+transition:.3s;
+}
+
+/* DARK MODE */
+
+.dark{
+background:#050807;
+color:#eee;
+}
+
+.dark .tools{
+background:#151a19ee;
+}
+
+.dark .paper{
+background:#22201a;
+color:#eee;
+border-color:#b59642;
+}
+
+.dark .quran,
+.dark .bismillah{
+color:#eee;
+}
+
+.dark .page-title,
+.dark .paper-footer{
+color:#d9bd61;
+}
+
+.dark .search{
+background:#292d2c;
+color:white;
+border-color:#555;
+}
+
+/* PAGE VIEW */
+
+.pageview .paper{
+max-width:100%;
+padding:55px 50px;
+}
+
+.pageview .quran{
+font-size:34px;
+line-height:2.7;
+}
+
+.pageview .bismillah{
+font-size:36px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+header h1{
+font-size:31px;
+}
+
+.paper{
+padding:22px 16px;
+border-width:7px;
+}
+
+.quran{
+font-size:25px;
+line-height:2.35;
+}
+
+.bismillah{
+font-size:27px;
+}
+
+.num{
+font-size:18px;
+}
+
+.pageview .paper{
+padding:35px 20px;
+}
+
+.pageview .quran{
+font-size:29px;
+}
+
+}
+
+/* LOADING */
+
+.loading{
+text-align:center;
+padding:50px 10px;
+font-family:serif;
+font-size:22px;
+color:#856b26;
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- STARS -->
+
+<div class="stars">
+
+<span class="star" style="top:8%;left:12%"></span>
+<span class="star" style="top:15%;left:70%"></span>
+<span class="star" style="top:25%;left:35%"></span>
+<span class="star" style="top:38%;left:85%"></span>
+<span class="star" style="top:55%;left:20%"></span>
+<span class="star" style="top:70%;left:65%"></span>
+<span class="star" style="top:82%;left:40%"></span>
+<span class="star" style="top:90%;left:90%"></span>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header>
+
+<div class="moon">☾</div>
+
+<h1>سُورَةُ يس</h1>
+
+<p>Surah Yasin • سورة يس • 83 Ayat</p>
+
+<div class="stats">
+
+<div class="stat">
+<b>83</b>
+Ayat
+</div>
+
+<div class="stat">
+<b id="viewCount">0</b>
+Views
+</div>
+
+<div class="stat">
+<b>36</b>
+Surah
+</div>
+
+</div>
+
+</header>
+
+
+<!-- TOOLS -->
+
+<div class="tools">
+
+<audio id="audio" controls>
+
+<source
+src="https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/36.mp3"
+type="audio/mpeg">
+
+</audio>
+
+
+<div class="buttons">
+
+<button onclick="home()">🏠 Home</button>
+
+<button onclick="sharePage()">📤 Share</button>
+
+<button onclick="downloadPage()">⬇️ Download</button>
+
+<button onclick="pageView()">📖 Page</button>
+
+<button onclick="copyQuran()">📋 Copy</button>
+
+<button onclick="darkMode()">🌙 Dark</button>
+
+</div>
+
+
+<input
+class="search"
+id="search"
+placeholder="🔍 Ayat number search..."
+oninput="searchAyat()">
+
+</div>
+
+
+<!-- PROGRESS -->
+
+<div class="progress-box">
+
+Reading Progress
+
+<div class="progress">
+
+<div
+class="progress-bar"
+id="progressBar">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- QURAN -->
+
+<div class="page">
+
+<div class="paper">
+
+<div class="ornament">
+۞ ✦ ۞
+</div>
+
+<div class="page-title">
+سُورَةُ يس
+</div>
+
+<div class="ornament">
+❖
+</div>
+
+
+<div class="bismillah">
+
+بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+
+</div>
+
+
+<div
+id="quran"
+class="quran">
+
+<div class="loading">
+Loading Quran...
+</div>
+
+</div>
+
+
+<div class="paper-footer">
+
+۞ سورة يس ۞
+
+<br>
+
+83 آيات
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="footer">
+
+© Surah Yasin • القرآن الكريم
+
+</div>
+
+
+<script>
+
+let allAyahs=[];
+
+
+/* LOAD QURAN */
+
+fetch(
+"https://api.alquran.cloud/v1/surah/36/quran-uthmani"
+)
+
+.then(response=>response.json())
+
+.then(data=>{
+
+allAyahs=data.data.ayahs;
+
+showAyahs(allAyahs);
+
+})
+
+.catch(()=>{
+
+document.getElementById("quran").innerHTML=
+
+'<div class="loading">Internet connection check செய்யுங்கள்.</div>';
+
+});
+
+
+/* SHOW AYATS */
+
+function showAyahs(list){
+
+let quran=document.getElementById("quran");
+
+quran.innerHTML="";
+
+if(list.length===0){
+
+quran.innerHTML=
+'<div class="loading">Ayat கிடைக்கவில்லை.</div>';
+
+return;
+
+}
+
+list.forEach(ayah=>{
+
+let text=ayah.text;
+
+text=text.replace(
+"بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+""
+).trim();
+
+let span=document.createElement("span");
+
+span.className="ayah";
+
+span.innerHTML=
+text+
+' <span class="num">﴿'+
+ayah.numberInSurah+
+'﴾</span> ';
+
+quran.appendChild(span);
+
+});
+
+  }
+
+
+/* SEARCH */
+
+function searchAyat(){
+
+let value=document
+.getElementById("search")
+.value
+.trim();
+
+if(value===""){
+
+showAyahs(allAyahs);
+
+return;
+
+}
+
+let result=allAyahs.filter(a=>
+
+String(a.numberInSurah).includes(value)
+
+);
+
+showAyahs(result);
+
+}
+
+
+/* DARK */
+
+function darkMode(){
+
+document.body.classList.toggle("dark");
+
+}
+
+
+/* HOME */
+
+function home(){
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+}
+
+
+/* PAGE VIEW */
+
+function pageView(){
+
+document.body.classList.toggle("pageview");
+
+}
+
+
+/* COPY */
+
+function copyQuran(){
+
+let text=allAyahs
+
+.map(a=>
+
+a.text+" ﴿"+a.numberInSurah+"﴾"
+
+)
+
+.join("\n\n");
+
+navigator.clipboard.writeText(text)
+
+.then(()=>{
+
+alert("Quran text copied ✅");
+
+})
+
+.catch(()=>{
+
+alert("Copy செய்ய முடியவில்லை.");
+
+});
+
+}
+
+
+/* SHARE */
+
+function sharePage(){
+
+if(navigator.share){
+
+navigator.share({
+
+title:"Surah Yasin",
+
+text:"سورة يس • Surah Yasin • 83 Ayat",
+
+url:window.location.href
+
+});
+
+}
+
+else{
+
+alert("இந்த browser-ல் Share வசதி இல்லை.");
+
+}
+
+}
+
+
+/* DOWNLOAD */
+
+function downloadPage(){
+
+let text=allAyahs
+
+.map(a=>
+
+a.text+" ﴿"+a.numberInSurah+"﴾"
+
+)
+
+.join("\n\n");
+
+let blob=new Blob(
+
+[text],
+
+{
+
+type:"text/plain;charset=utf-8"
+
+}
+
+);
+
+let url=URL.createObjectURL(blob);
+
+let a=document.createElement("a");
+
+a.href=url;
+
+a.download="Surah-Yasin.txt";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+}
+
+
+/* VIEW COUNTER */
+
+let views=
+localStorage.getItem("yasinViews");
+
+if(!views){
+
+views=0;
+
+}
+
+views++;
+
+localStorage.setItem(
+"yasinViews",
+views
+);
+
+document.getElementById(
+"viewCount"
+).innerText=views;
+
+
+/* READING PROGRESS */
+
+window.addEventListener(
+"scroll",
+function(){
+
+let scrollTop=
+window.scrollY;
+
+let height=
+document.documentElement.scrollHeight-
+window.innerHeight;
+
+let percent=
+(height>0)
+?
+(scrollTop/height)*100
+:
+0;
+
+document.getElementById(
+"progressBar"
+).style.width=
+percent+"%";
+
+});
+
+
+</script>
+
+</body>
+</html>
